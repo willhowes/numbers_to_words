@@ -8,4 +8,10 @@ describe("#numbersToWords", () => {
   it("Returns 'one,two' given and input of (1,2)", () => {
     expect(numbersToWords(1, 2)).toEqual("One\nTwo");
   });
+
+  it("Returns all numbers up to nine correctly", () => {
+    expect(numbersToWords(1, 9)).toEqual(
+      "One\nTwo\nThree\nFour\nFive\nSix\nSeven\nEight\nNine"
+    );
+  });
 });
