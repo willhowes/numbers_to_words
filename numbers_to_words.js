@@ -51,7 +51,7 @@ const numbersToWords = (startNumber, endNumber) => {
         );
       }
     } else if (i > 99 && i < 999) {
-      if (remainderAfterHundred(i) === 0) {
+      if (remainderAfterHundreds(i) === 0) {
         convertedNumbers.push(`${ones[noOfHundreds(i)]} hundred`);
       } else if (remainderAfterTens(i) === 0) {
         convertedNumbers.push(
@@ -65,7 +65,7 @@ const numbersToWords = (startNumber, endNumber) => {
       ) {
         convertedNumbers.push(
           `${ones[noOfHundreds(i)]} hundred and ${teens[
-            remainderAfterHundred(i)
+            remainderAfterHundreds(i)
           ].toLowerCase()}`
         );
       } else {
@@ -75,9 +75,17 @@ const numbersToWords = (startNumber, endNumber) => {
           ].toLowerCase()}-${ones[remainderAfterTens(i)].toLowerCase()}`
         );
       }
+    } else {
+      if (remainderAfterThousands(i) === 0) {
+        convertedNumbers.push(`${ones[noOfThousands(i)]} thousand`);
+      }
     }
   }
   return convertedNumbers.join("\n");
+};
+
+const noOfThousands = number => {
+  return Math.floor(number / 1000);
 };
 
 const noOfHundreds = number => {
@@ -93,7 +101,10 @@ const noOfTens = number => {
   }
 };
 
-const remainderAfterHundred = number => {
+const remainderAfterThousands = number => {
+  return number % 1000;
+};
+const remainderAfterHundreds = number => {
   return number % 100;
 };
 

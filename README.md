@@ -1,6 +1,6 @@
 # Numbers to Words
 
-A programme that converts numbers from 1 to 100,000 into words
+A programme that converts numbers from 1 to 100,000 into words.
 
 ## Instructions
 
