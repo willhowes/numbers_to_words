@@ -78,6 +78,12 @@ const numbersToWords = (startNumber, endNumber) => {
     } else {
       if (remainderAfterThousands(i) === 0) {
         convertedNumbers.push(`${ones[noOfThousands(i)]} thousand`);
+      } else if (remainderAfterHundreds(i) === 0) {
+        convertedNumbers.push(
+          `${ones[noOfThousands(i)]} thousand, ${ones[
+            noOfHundreds(i)
+          ].toLowerCase()} hundred`
+        );
       }
     }
   }
@@ -89,7 +95,12 @@ const noOfThousands = number => {
 };
 
 const noOfHundreds = number => {
-  return Math.floor(number / 100);
+  let totalHundreds = Math.floor(number / 100);
+  if (totalHundreds == 10) {
+    return 10;
+  } else {
+    return totalHundreds % 10;
+  }
 };
 
 const noOfTens = number => {

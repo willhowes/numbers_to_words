@@ -48,13 +48,17 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(300, 300)).toEqual("Three hundred");
   });
 
-  it("Correctly handles numbers divisble by 1000", () => {
+  it("Correctly handles numbers divisble by 1000 up to 9000", () => {
     expect(numbersToWords(2000, 2000)).toEqual("Two thousand");
+  });
+
+  it("Correctly handles number above 1000 divisble by 100", () => {
+    expect(numbersToWords(3500, 3500)).toEqual("Three thousand, five hundred");
   });
 
   xit("Correct handles numbers above 1000", () => {
     expect(numbersToWords(3456, 3456)).toEqual(
-      "Three thousand four hundred and fifty-six"
+      "Three thousand, four hundred and fifty-six"
     );
   });
 });
