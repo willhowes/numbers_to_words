@@ -56,7 +56,7 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(3500, 3500)).toEqual("Three thousand, five hundred");
   });
 
-  xit("Correctly handles numbers above 1000 with teen numbers", () => {
+  it("Correctly handles numbers above 1000 with teen numbers", () => {
     expect(numbersToWords(4111, 4111)).toEqual(
       "Four thousand, one hundred and eleven"
     );

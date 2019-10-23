@@ -8,7 +8,8 @@ A programme that converts numbers from 1 to 100,000 into words.
 - Use the function `numbersToWords()` and insert your start number and finish number as the two arguments.
 - e.g.
 
-```numbersToWords(1,5)
+```
+numbersToWords(1,5)
 => One
 Two
 Three

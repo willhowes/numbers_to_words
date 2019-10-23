@@ -85,13 +85,13 @@ const numbersToWords = (startNumber, endNumber) => {
           ].toLowerCase()} hundred`
         );
       } else if (
-        i - noOfThousands(i) * 1000 < 20 &&
-        i - noOfThousands(i) * 1000 > 10
+        i - noOfHundreds(i) * 100 < 20 &&
+        i - noOfHundreds(i) * 100 > 10
       ) {
         convertedNumbers.push(
           `${ones[noOfThousands(i)]} thousand, ${noOfHundreds(
             i
-          )} hundred and ${teens[remainderAfterThousands(i)].toLowerCase()}`
+          )} hundred and ${teens[remainderAfterHundreds(i)].toLowerCase()}`
         );
       } else {
         convertedNumbers.push(
