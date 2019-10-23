@@ -14,4 +14,10 @@ describe("#numbersToWords", () => {
       "One\nTwo\nThree\nFour\nFive\nSix\nSeven\nEight\nNine"
     );
   });
+
+  it("Returns all the teens correctly", () => {
+    expect(numbersToWords(11, 19)).toEqual(
+      "Eleven\nTwelve\nThirteen\nFourteen\nFifteen\nSixteen\nSeventeen\nEighteen\nNineteen"
+    );
+  });
 });
