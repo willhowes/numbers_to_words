@@ -21,7 +21,13 @@ describe("#numbersToWords", () => {
     );
   });
 
+  it("Correctly handles divisables of ten", () => {
+    expect(numbersToWords(10, 10)).toEqual("Ten");
+    expect(numbersToWords(60, 60)).toEqual("Sixty");
+  });
+
   it("Correctly handles numbers above twenty but below 100", () => {
     expect(numbersToWords(21, 21)).toEqual("Twenty-One");
+    expect(numbersToWords(49, 49)).toEqual("Forty-Nine");
   });
 });
