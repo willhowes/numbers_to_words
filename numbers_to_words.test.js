@@ -39,4 +39,8 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(250, 250)).toEqual("Two hundred and fifty");
     expect(numbersToWords(790, 790)).toEqual("Seven hundred and ninety");
   });
+
+  it("Correctly handles a number above 100 with a teen number involved", () => {
+    expect(numbersToWords(513, 513)).toEqual("Five hundred and thirteen");
+  });
 });

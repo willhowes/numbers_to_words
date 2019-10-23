@@ -59,6 +59,15 @@ const numbersToWords = (startNumber, endNumber) => {
             noOfTens(i)
           ].toLowerCase()}`
         );
+      } else if (
+        i - noOfHundreds(i) * 100 < 20 &&
+        i - noOfHundreds(i) * 100 > 10
+      ) {
+        convertedNumbers.push(
+          `${ones[noOfHundreds(i)]} hundred and ${teens[
+            remainderAfterHundred(i)
+          ].toLowerCase()}`
+        );
       } else {
         convertedNumbers.push(
           `${ones[noOfHundreds(i)]} hundred and ${tens[
