@@ -34,4 +34,9 @@ describe("#numbersToWords", () => {
   it("Correctly handles a number above 100", () => {
     expect(numbersToWords(121, 121)).toEqual("One hundred and twenty-one");
   });
+
+  it("Correctly handles a divisble of ten between 100 and 900", () => {
+    expect(numbersToWords(250, 250)).toEqual("Two hundred and fifty");
+    expect(numbersToWords(790, 790)).toEqual("Seven hundred and ninety");
+  });
 });
