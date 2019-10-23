@@ -2,6 +2,20 @@
 
 A programme that converts numbers from 1 to 100,000 into words.
 
+## To run the program
+
+- Copy the contents of `numbers_to_words.js` into your REPL.
+- Use the function `numbersToWords()` and insert your start number and finish number as the two arguments.
+- e.g.
+
+```numbersToWords(1,5)
+=> One
+Two
+Three
+Four
+Five
+```
+
 ## Instructions
 
 The challenge is called "Numbers"
