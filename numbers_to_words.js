@@ -52,7 +52,7 @@ const numbersToWords = (startNumber, endNumber) => {
       }
     } else if (i > 99 && i < 999) {
       if (remainderAfterHundred(i) === 0) {
-        convertedNumbers.push(`${noOfHundreds(i)} hundred`);
+        convertedNumbers.push(`${ones[noOfHundreds(i)]} hundred`);
       } else if (remainderAfterTens(i) === 0) {
         convertedNumbers.push(
           `${ones[noOfHundreds(i)]} hundred and ${tens[

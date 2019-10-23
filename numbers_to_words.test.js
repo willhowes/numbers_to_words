@@ -43,4 +43,8 @@ describe("#numbersToWords", () => {
   it("Correctly handles a number above 100 with a teen number involved", () => {
     expect(numbersToWords(513, 513)).toEqual("Five hundred and thirteen");
   });
+
+  it("Correctly handles numbers divisible by 100", () => {
+    expect(numbersToWords(300, 300)).toEqual("Three hundred");
+  });
 });
