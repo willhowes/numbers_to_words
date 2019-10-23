@@ -22,6 +22,18 @@ const teens = {
   19: "Nineteen"
 };
 
+const tens = {
+  1: "ten",
+  2: "Twenty",
+  3: "Thirty",
+  4: "Forty",
+  5: "Fifty",
+  6: "Sixty",
+  7: "Seventy",
+  8: "Eighty",
+  9: "Ninety"
+};
+
 const numbersToWords = (startNumber, endNumber) => {
   let i;
   convertedNumbers = [];
@@ -30,6 +42,10 @@ const numbersToWords = (startNumber, endNumber) => {
       convertedNumbers.push(ones[i]);
     } else if (i > 10 && i < 20) {
       convertedNumbers.push(teens[i]);
+    } else if (i > 19 && i < 100) {
+      let noOfTens = Math.floor(i / 10);
+      let remainder = i - noOfTens * 10;
+      convertedNumbers.push(`${tens[noOfTens]}-${ones[remainder]}`);
     }
   }
   return convertedNumbers.join("\n");

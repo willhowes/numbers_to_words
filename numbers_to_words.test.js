@@ -20,4 +20,8 @@ describe("#numbersToWords", () => {
       "Eleven\nTwelve\nThirteen\nFourteen\nFifteen\nSixteen\nSeventeen\nEighteen\nNineteen"
     );
   });
+
+  it("Correctly handles numbers above twenty but below 100", () => {
+    expect(numbersToWords(21, 21)).toEqual("Twenty-One");
+  });
 });
