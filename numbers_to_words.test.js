@@ -30,4 +30,8 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(21, 21)).toEqual("Twenty-One");
     expect(numbersToWords(49, 49)).toEqual("Forty-Nine");
   });
+
+  it("Correctly handles a number above 100", () => {
+    expect(numbersToWords(121, 121)).toEqual("One hundred and twenty-one");
+  });
 });

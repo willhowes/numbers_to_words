@@ -50,6 +50,19 @@ const numbersToWords = (startNumber, endNumber) => {
       } else {
         convertedNumbers.push(`${tens[noOfTens]}-${ones[remainder]}`);
       }
+    } else if (i > 99 && i < 999) {
+      let noOfHundreds = Math.floor(i / 100);
+      let remainder = i - noOfHundreds * 100;
+      let noOfTens = Math.floor(remainder / 10);
+      let remainderAfterTens = remainder - noOfTens * 10;
+      if (remainder === 0) {
+      } else {
+        convertedNumbers.push(
+          `${ones[noOfHundreds]} hundred and ${tens[
+            noOfTens
+          ].toLowerCase()}-${ones[remainderAfterTens].toLowerCase()}`
+        );
+      }
     }
   }
   return convertedNumbers.join("\n");
