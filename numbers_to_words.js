@@ -43,29 +43,47 @@ const numbersToWords = (startNumber, endNumber) => {
     } else if (i > 10 && i < 20) {
       convertedNumbers.push(teens[i]);
     } else if ((i > 19 && i < 100) || i == 10) {
-      let noOfTens = Math.floor(i / 10);
-      let remainder = i - noOfTens * 10;
-      if (remainder === 0) {
-        convertedNumbers.push(`${tens[noOfTens]}`);
-      } else {
-        convertedNumbers.push(`${tens[noOfTens]}-${ones[remainder]}`);
-      }
-    } else if (i > 99 && i < 999) {
-      let noOfHundreds = Math.floor(i / 100);
-      let remainder = i - noOfHundreds * 100;
-      let noOfTens = Math.floor(remainder / 10);
-      let remainderAfterTens = remainder - noOfTens * 10;
-      if (remainder === 0) {
+      if (remainderAfterTens(i) === 0) {
+        convertedNumbers.push(`${tens[noOfTens(i)]}`);
       } else {
         convertedNumbers.push(
-          `${ones[noOfHundreds]} hundred and ${tens[
-            noOfTens
-          ].toLowerCase()}-${ones[remainderAfterTens].toLowerCase()}`
+          `${tens[noOfTens(i)]}-${ones[remainderAfterTens(i)]}`
+        );
+      }
+    } else if (i > 99 && i < 999) {
+      if (remainderAfterHundred(i) === 0) {
+        convertedNumbers.push(`${noOfHundreds(i)} hundred`);
+      } else {
+        convertedNumbers.push(
+          `${ones[noOfHundreds(i)]} hundred and ${tens[
+            noOfTens(i)
+          ].toLowerCase()}-${ones[remainderAfterTens(i)].toLowerCase()}`
         );
       }
     }
   }
   return convertedNumbers.join("\n");
+};
+
+const noOfHundreds = number => {
+  return Math.floor(number / 100);
+};
+
+const noOfTens = number => {
+  let totalTens = Math.floor(number / 10);
+  if (totalTens == 10) {
+    return 10;
+  } else {
+    return totalTens % 10;
+  }
+};
+
+const remainderAfterHundred = number => {
+  return number % 100;
+};
+
+const remainderAfterTens = number => {
+  return number % 10;
 };
 
 module.exports = numbersToWords;
