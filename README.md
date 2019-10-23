@@ -17,7 +17,7 @@ Four
 Five
 ```
 
-## Instructions
+## Tech Test Instructions
 
 The challenge is called "Numbers"
 
