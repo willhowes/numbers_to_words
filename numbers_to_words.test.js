@@ -85,4 +85,8 @@ describe("#numbersToWords", () => {
       "Thirty thousand, one hundred and eleven"
     );
   });
+
+  it("Correctly handles numbers above 99999", () => {
+    expect(numbersToWords(100000, 100000)).toEqual("One hundred thousand");
+  });
 });

@@ -55,35 +55,7 @@ const numbersToWords = (startNumber, endNumber) => {
         numberAsWord.push(handleOnes(noRemaining));
       }
     }
-
-    numberAsWord = numberAsWord.filter(numberWord => {
-      return numberWord != undefined;
-    });
-
-    if (
-      numberAsWord.length > 1 &&
-      !numberAsWord[numberAsWord.length - 2].includes("thousand")
-    ) {
-      numberAsWord.splice(numberAsWord.length - 1, 0, "and");
-    }
-
-    if (
-      numberAsWord.length === 2 &&
-      numberAsWord[0].includes("thousand" || "hundred") &&
-      !numberAsWord[numberAsWord.length - 1].includes("hundred")
-    ) {
-      numberAsWord.splice(numberAsWord.length - 1, 0, "and");
-    }
-
-    if (
-      numberAsWord.length > 1 &&
-      numberAsWord[0].includes("thousand") &&
-      numberAsWord[1].includes("hundred")
-    ) {
-      numberAsWord[0] += ",";
-    }
-    numberAsWord = capitalizeFirstLetter(numberAsWord.join(" "));
-    convertedNumbers.push(numberAsWord);
+    convertedNumbers.push(formatNumberWord(numberAsWord));
   }
 
   return convertedNumbers.join("\n");
@@ -100,6 +72,8 @@ const convertToWord = number => {
     } else {
       return `${tens[noOfTens(number)]}-${ones[remainderAfterTens(number)]}`;
     }
+  } else if (number > 99) {
+    handleHundreds(number);
   }
 };
 
@@ -163,6 +137,36 @@ const remainderAfterTens = number => {
 
 const capitalizeFirstLetter = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const formatNumberWord = numberAsWord => {
+  numberAsWord = numberAsWord.filter(numberWord => {
+    return numberWord != undefined;
+  });
+
+  if (
+    numberAsWord.length > 1 &&
+    !numberAsWord[numberAsWord.length - 2].includes("thousand")
+  ) {
+    numberAsWord.splice(numberAsWord.length - 1, 0, "and");
+  }
+
+  if (
+    numberAsWord.length === 2 &&
+    numberAsWord[0].includes("thousand" || "hundred") &&
+    !numberAsWord[numberAsWord.length - 1].includes("hundred")
+  ) {
+    numberAsWord.splice(numberAsWord.length - 1, 0, "and");
+  }
+
+  if (
+    numberAsWord.length > 1 &&
+    numberAsWord[0].includes("thousand") &&
+    numberAsWord[1].includes("hundred")
+  ) {
+    numberAsWord[0] += ",";
+  }
+  return capitalizeFirstLetter(numberAsWord.join(" "));
 };
 
 module.exports = numbersToWords;
