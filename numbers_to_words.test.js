@@ -78,5 +78,11 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(75550, 75550)).toEqual(
       "Seventy-five thousand, five hundred and fifty"
     );
+    expect(numbersToWords(99999, 99999)).toEqual(
+      "Ninety-nine thousand, nine hundred and ninety-nine"
+    );
+    expect(numbersToWords(30111, 30111)).toEqual(
+      "Thirty thousand, one hundred and eleven"
+    );
   });
 });
