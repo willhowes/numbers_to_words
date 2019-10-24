@@ -15,7 +15,7 @@ describe("#numbersToWords", () => {
     );
   });
 
-  it.only("Returns all the teens correctly", () => {
+  it("Returns all the teens correctly", () => {
     expect(numbersToWords(11, 19)).toEqual(
       "Eleven\nTwelve\nThirteen\nFourteen\nFifteen\nSixteen\nSeventeen\nEighteen\nNineteen"
     );
@@ -26,9 +26,9 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(60, 60)).toEqual("Sixty");
   });
 
-  it("Correctly handles numbers above twenty but below 100", () => {
-    expect(numbersToWords(21, 21)).toEqual("Twenty-One");
-    expect(numbersToWords(49, 49)).toEqual("Forty-Nine");
+  it.only("Correctly handles numbers above twenty but below 100", () => {
+    expect(numbersToWords(21, 21)).toEqual("Twenty-one");
+    expect(numbersToWords(49, 49)).toEqual("Forty-nine");
   });
 
   it("Correctly handles a number above 100", () => {

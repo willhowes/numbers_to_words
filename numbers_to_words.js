@@ -45,8 +45,13 @@ const numbersToWords = (startNumber, endNumber) => {
     numberAsWord.push(handleHundreds(noRemaining));
     noRemaining = i % 100;
     numberAsWord.push(handleTens(noRemaining));
-    noRemaining = i % 10;
-    numberAsWord.push(handleOnes(noRemaining));
+    if (
+      !numberAsWord[numberAsWord.length - 1].includes("-") &&
+      !Object.values(teens).includes(numberAsWord[numberAsWord.length - 1])
+    ) {
+      noRemaining = i % 10;
+      numberAsWord.push(handleOnes(noRemaining));
+    }
     numberAsWord = numberAsWord.filter(numberWord => {
       return numberWord != undefined;
     });
