@@ -67,4 +67,16 @@ describe("#numbersToWords", () => {
       "Three thousand, four hundred and fifty-six"
     );
   });
+
+  it("Correctly handles numbers above 9999 up to 99999", () => {
+    expect(numbersToWords(10000, 10000)).toEqual("Ten thousand");
+    expect(numbersToWords(50001, 50001)).toEqual("Fifty thousand and one");
+    expect(numbersToWords(42222, 42222)).toEqual(
+      "Forty-two thousand, two hundred and twenty-two"
+    );
+    expect(numbersToWords(50013, 50013)).toEqual("Fifty thousand and thirteen");
+    expect(numbersToWords(75550, 75550)).toEqual(
+      "Seventy-five thousand, five hundred and fifty"
+    );
+  });
 });

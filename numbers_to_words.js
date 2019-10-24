@@ -59,12 +59,22 @@ const numbersToWords = (startNumber, endNumber) => {
     numberAsWord = numberAsWord.filter(numberWord => {
       return numberWord != undefined;
     });
+
     if (
       numberAsWord.length > 1 &&
       !numberAsWord[numberAsWord.length - 2].includes("thousand")
     ) {
       numberAsWord.splice(numberAsWord.length - 1, 0, "and");
     }
+
+    if (
+      numberAsWord.length === 2 &&
+      numberAsWord[0].includes("thousand" || "hundred") &&
+      !numberAsWord[numberAsWord.length - 1].includes("hundred")
+    ) {
+      numberAsWord.splice(numberAsWord.length - 1, 0, "and");
+    }
+
     if (
       numberAsWord.length > 1 &&
       numberAsWord[0].includes("thousand") &&
@@ -145,13 +155,6 @@ const noOfTens = number => {
   } else {
     return totalTens % 10;
   }
-};
-
-const remainderAfterThousands = number => {
-  return number % 1000;
-};
-const remainderAfterHundreds = number => {
-  return number % 100;
 };
 
 const remainderAfterTens = number => {
