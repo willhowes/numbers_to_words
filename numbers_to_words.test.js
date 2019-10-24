@@ -15,7 +15,7 @@ describe("#numbersToWords", () => {
     );
   });
 
-  it("Returns all the teens correctly", () => {
+  it.only("Returns all the teens correctly", () => {
     expect(numbersToWords(11, 19)).toEqual(
       "Eleven\nTwelve\nThirteen\nFourteen\nFifteen\nSixteen\nSeventeen\nEighteen\nNineteen"
     );

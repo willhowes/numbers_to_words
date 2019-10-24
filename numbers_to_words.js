@@ -1,112 +1,106 @@
 const ones = {
-  1: "One",
-  2: "Two",
-  3: "Three",
-  4: "Four",
-  5: "Five",
-  6: "Six",
-  7: "Seven",
-  8: "Eight",
-  9: "Nine"
+  1: "one",
+  2: "two",
+  3: "three",
+  4: "four",
+  5: "five",
+  6: "six",
+  7: "seven",
+  8: "eight",
+  9: "nine"
 };
 
 const teens = {
-  11: "Eleven",
-  12: "Twelve",
-  13: "Thirteen",
-  14: "Fourteen",
-  15: "Fifteen",
-  16: "Sixteen",
-  17: "Seventeen",
-  18: "Eighteen",
-  19: "Nineteen"
+  11: "eleven",
+  12: "twelve",
+  13: "thirteen",
+  14: "fourteen",
+  15: "fifteen",
+  16: "sixteen",
+  17: "seventeen",
+  18: "eighteen",
+  19: "nineteen"
 };
 
 const tens = {
-  1: "Ten",
-  2: "Twenty",
-  3: "Thirty",
-  4: "Forty",
-  5: "Fifty",
-  6: "Sixty",
-  7: "Seventy",
-  8: "Eighty",
-  9: "Ninety"
+  1: "ten",
+  2: "twenty",
+  3: "thirty",
+  4: "forty",
+  5: "fifty",
+  6: "sixty",
+  7: "seventy",
+  8: "eighty",
+  9: "ninety"
 };
 
 const numbersToWords = (startNumber, endNumber) => {
   let i;
   convertedNumbers = [];
   for (i = startNumber; i <= endNumber; i++) {
-    if (i < 10) {
-      convertedNumbers.push(ones[i]);
-    } else if (i > 10 && i < 20) {
-      convertedNumbers.push(teens[i]);
-    } else if ((i > 19 && i < 100) || i == 10) {
-      if (remainderAfterTens(i) === 0) {
-        convertedNumbers.push(`${tens[noOfTens(i)]}`);
-      } else {
-        convertedNumbers.push(
-          `${tens[noOfTens(i)]}-${ones[remainderAfterTens(i)]}`
-        );
-      }
-    } else if (i > 99 && i < 999) {
-      if (remainderAfterHundreds(i) === 0) {
-        convertedNumbers.push(`${ones[noOfHundreds(i)]} hundred`);
-      } else if (remainderAfterTens(i) === 0) {
-        convertedNumbers.push(
-          `${ones[noOfHundreds(i)]} hundred and ${tens[
-            noOfTens(i)
-          ].toLowerCase()}`
-        );
-      } else if (
-        i - noOfHundreds(i) * 100 < 20 &&
-        i - noOfHundreds(i) * 100 > 10
-      ) {
-        convertedNumbers.push(
-          `${ones[noOfHundreds(i)]} hundred and ${teens[
-            remainderAfterHundreds(i)
-          ].toLowerCase()}`
-        );
-      } else {
-        convertedNumbers.push(
-          `${ones[noOfHundreds(i)]} hundred and ${tens[
-            noOfTens(i)
-          ].toLowerCase()}-${ones[remainderAfterTens(i)].toLowerCase()}`
-        );
-      }
+    let numberAsWord = [];
+    let noRemaining = i;
+    numberAsWord.push(handleThousands(i));
+    noRemaining = i % 1000;
+    numberAsWord.push(handleHundreds(noRemaining));
+    noRemaining = i % 100;
+    numberAsWord.push(handleTens(noRemaining));
+    noRemaining = i % 10;
+    numberAsWord.push(handleOnes(noRemaining));
+    numberAsWord = numberAsWord.filter(numberWord => {
+      return numberWord != undefined;
+    });
+    numberAsWord = capitalizeFirstLetter(numberAsWord.join(" "));
+    convertedNumbers.push(numberAsWord);
+  }
+
+  return convertedNumbers.join("\n");
+};
+
+const convertToWord = number => {
+  if (number < 10) {
+    return ones[number];
+  } else if (number > 10 && number < 20) {
+    return teens[number];
+  } else if ((number > 19 && number < 100) || number == 10) {
+    if (remainderAfterTens(number) === 0) {
+      return tens[noOfTens(number)];
     } else {
-      if (remainderAfterThousands(i) === 0) {
-        convertedNumbers.push(`${ones[noOfThousands(i)]} thousand`);
-      } else if (remainderAfterHundreds(i) === 0) {
-        convertedNumbers.push(
-          `${ones[noOfThousands(i)]} thousand, ${ones[
-            noOfHundreds(i)
-          ].toLowerCase()} hundred`
-        );
-      } else if (
-        remainderAfterThousands(i) - noOfHundreds(i) * 100 < 20 &&
-        remainderAfterThousands(i) - noOfHundreds(i) * 100 > 10
-      ) {
-        convertedNumbers.push(
-          `${ones[noOfThousands(i)]} thousand, ${ones[
-            noOfHundreds(i)
-          ].toLowerCase()} hundred and ${teens[
-            remainderAfterHundreds(i)
-          ].toLowerCase()}`
-        );
-      } else {
-        convertedNumbers.push(
-          `${ones[noOfThousands(i)]} thousand, ${ones[
-            noOfHundreds(i)
-          ].toLowerCase()} hundred and ${tens[
-            noOfTens(i)
-          ].toLowerCase()}-${ones[remainderAfterTens(i)].toLowerCase()}`
-        );
-      }
+      return `${tens[noOfTens(number)]}-${ones[remainderAfterTens(number)]}`;
     }
   }
-  return convertedNumbers.join("\n");
+};
+
+const handleThousands = number => {
+  if (noOfThousands(number) === 0) {
+    return;
+  } else {
+    return `${convertToWord(noOfThousands(number))} thousand`;
+  }
+};
+
+const handleHundreds = number => {
+  if (noOfHundreds(number) === 0) {
+    return;
+  } else {
+    return `${convertToWord(noOfHundreds(number))} hundred`;
+  }
+};
+
+const handleTens = number => {
+  if (noOfTens(number) === 0) {
+    return;
+  } else {
+    return `${convertToWord(number)}`;
+  }
+};
+
+const handleOnes = number => {
+  if (number === 0) {
+    return;
+  } else {
+    return `${ones[number]}`;
+  }
 };
 
 const noOfThousands = number => {
@@ -140,6 +134,10 @@ const remainderAfterHundreds = number => {
 
 const remainderAfterTens = number => {
   return number % 10;
+};
+
+const capitalizeFirstLetter = string => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 module.exports = numbersToWords;
