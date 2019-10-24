@@ -45,16 +45,33 @@ const numbersToWords = (startNumber, endNumber) => {
     numberAsWord.push(handleHundreds(noRemaining));
     noRemaining = i % 100;
     numberAsWord.push(handleTens(noRemaining));
-    if (
-      !numberAsWord[numberAsWord.length - 1].includes("-") &&
-      !Object.values(teens).includes(numberAsWord[numberAsWord.length - 1])
-    ) {
-      noRemaining = i % 10;
-      numberAsWord.push(handleOnes(noRemaining));
+    if (numberAsWord.length > 0) {
+      if (
+        numberAsWord[numberAsWord.length - 1] === undefined ||
+        (!numberAsWord[numberAsWord.length - 1].includes("-") &&
+          !Object.values(teens).includes(numberAsWord[numberAsWord.length - 1]))
+      ) {
+        noRemaining = i % 10;
+        numberAsWord.push(handleOnes(noRemaining));
+      }
     }
+
     numberAsWord = numberAsWord.filter(numberWord => {
       return numberWord != undefined;
     });
+    if (
+      numberAsWord.length > 1 &&
+      !numberAsWord[numberAsWord.length - 2].includes("thousand")
+    ) {
+      numberAsWord.splice(numberAsWord.length - 1, 0, "and");
+    }
+    if (
+      numberAsWord.length > 1 &&
+      numberAsWord[0].includes("thousand") &&
+      numberAsWord[1].includes("hundred")
+    ) {
+      numberAsWord[0] += ",";
+    }
     numberAsWord = capitalizeFirstLetter(numberAsWord.join(" "));
     convertedNumbers.push(numberAsWord);
   }

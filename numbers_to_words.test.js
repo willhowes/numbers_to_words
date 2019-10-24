@@ -26,7 +26,7 @@ describe("#numbersToWords", () => {
     expect(numbersToWords(60, 60)).toEqual("Sixty");
   });
 
-  it.only("Correctly handles numbers above twenty but below 100", () => {
+  it("Correctly handles numbers above twenty but below 100", () => {
     expect(numbersToWords(21, 21)).toEqual("Twenty-one");
     expect(numbersToWords(49, 49)).toEqual("Forty-nine");
   });
